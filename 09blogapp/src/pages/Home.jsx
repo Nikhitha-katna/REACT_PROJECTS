@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import service from '../appwrite/config'; // Import service
+import service from '../appwrite/config'; 
 import { Container, PostCard } from '../components';
 
 function Home() {
@@ -10,16 +10,16 @@ function Home() {
   useEffect(() => {
     async function checkAuth() {
       try {
-        const user = await service.getAccount(); // Check if the user is logged in
+        const user = await service.getAccount(); 
         if (user) {
           setIsAuthenticated(true);
-          fetchPosts(); // Fetch posts if logged in
+          fetchPosts(); 
         } else {
           setIsAuthenticated(false);
         }
       } catch (error) {
         console.log("User not authenticated", error);
-        setIsAuthenticated(false); // Not authenticated
+        setIsAuthenticated(false); 
       } finally {
         setLoading(false);
       }
@@ -29,15 +29,15 @@ function Home() {
       try {
         const response = await service.getPosts();
         if (response) {
-          setPosts(response.documents); // Set the posts
+          setPosts(response.documents); 
         }
       } catch (error) {
         console.log('Error fetching posts:', error);
       }
     }
 
-    checkAuth(); // Run the auth check when the component mounts
-  }, []); // Only run once, on mount
+    checkAuth(); 
+  }, []); 
 
   if (loading) {
     return (
