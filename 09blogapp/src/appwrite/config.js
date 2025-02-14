@@ -42,12 +42,13 @@ export class Service {
   }
 
   // Post Methods
-  async createPost({ title, slug, content, featuredImage, status, userId }) {
+  async createPost({title, slug, content, featuredImage, status, userId}) {
     try {
+      const documentId = ID.unique();  // Generate a unique document ID
       return await this.databases.createDocument(
         conf.appwriteDatabaseId,
         conf.appwriteCollectionId,
-        slug,
+        documentId,  // Use the generated document ID
         {
           title,
           content,
@@ -57,9 +58,12 @@ export class Service {
         }
       );
     } catch (error) {
+      console.log("Error creating post:", error);  
       throw error;
     }
   }
+  
+  
 
   async updatePost(slug, { title, content, featuredImage, status }) {
     try {
